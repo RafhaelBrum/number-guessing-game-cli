@@ -43,7 +43,6 @@ export async function difficultyLevel(): Promise<string> {
                     }
 
                     resolve(difficulty);
-                    // rl.close();
                 }
             });
         }
@@ -66,7 +65,7 @@ export function getChancesByDifficulty(level: string): number {
     return levels[level];
 }
 
-export function isCorrect(chances: number, answer: number, secret: number): boolean {
+export function isCorrect(answer: number, secret: number): boolean {
     if (secret > answer) {
         console.log(`Incorrect! The number is greater than ${ answer }.`);
         return false;
@@ -93,7 +92,7 @@ function ask(question: string): Promise<string> {
 function playAgain() {
     rl.question(`Wanna play again? Y or N       `, (answer) => {
         if (answer === "y") playGame();
-        if (answer === "n") {
+        else if (answer === "n") {
             rl.close();
             return;
         }
@@ -110,13 +109,12 @@ export async function playGame() {
     let counter = 0;
 
     for (let i = 0; i < chances; i++) {
-        const guess = await ask(`Enter your guess: `);
+        const guess = await ask(`\nEnter your guess: `);
         if (Number(guess) > 100) console.log('lol!');
-        result = isCorrect(chances, Number(guess), randomNumber)
+        result = isCorrect(Number(guess), randomNumber)
         counter++
-
         if (result) break;
-
+        if (chances - counter !== 0) console.log(`You have ${ chances - counter } chances left.`)
 
     }
 
@@ -127,7 +125,7 @@ export async function playGame() {
     }
 
     else {
-        console.log(`You lose.`);
+        console.log(`You lose. The number was ${ randomNumber }.\n`);
         playAgain();
     }
 
