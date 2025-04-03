@@ -20,4 +20,22 @@ export function getChancesByDifficulty(level: string, chances?: number): number 
     return levels[level];
 }
 
+export function isCorrect(chances: number, answer: number, secret: number): void {
+    let counter = 0;
+
+    for (let i = 0; i < chances; i++) {
+
+        if (secret > answer) {
+            console.log(`Incorrect! The number is greater than ${ answer }.`);
+        }
+        else if (secret < answer) {
+            console.log(`Incorrect! The number is less than ${ answer }.`)
+        } else {
+            console.log(`Congratulations! You guessed the correct number in ${ counter } attempts.`)
+            return;
+        }
+    }
+    console.log(`You lose... the correct number was ${ secret }.`);
+    return;
+}
 
