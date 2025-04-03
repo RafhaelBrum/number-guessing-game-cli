@@ -1,3 +1,5 @@
 import { difficultyLevel } from "./utils/input";
+import { generateRandomNumber } from "./utils/gameLogic";
 
-difficultyLevel();
+// difficultyLevel();
+generateRandomNumber();
