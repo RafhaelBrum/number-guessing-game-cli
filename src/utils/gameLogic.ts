@@ -120,8 +120,7 @@ export async function playGame() {
 
     if (result) {
         console.log(`Congratulations! You guessed the correct number in ${ counter } attempts.`)
-        rl.close();
-        return;
+        playAgain();
     }
 
     else {
